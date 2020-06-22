@@ -1,3 +1,7 @@
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import StepContent from "@material-ui/core/StepContent";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -13,9 +17,13 @@ import Facebook from "../../assets/design/FacebookTidotDesktop.png";
 import GoogleLogo from "../../assets/design/Icon.png";
 import Google from "../../assets/design/TidotDesktopGoogle.png";
 import UserImage from "../../assets/design/TidotImage.png";
+import smallTidotLogo from "../../assets/design/smallTidotLogo.png";
 import rides from "../../assets/design/rides.png";
 import transport from "../../assets/design/transport.svg";
 import CircularSpinner from "../../components/spinner/circularSpinner/circularSpinner";
+import Biodetails from "../userSection/userProfileSetupssection/Biodetails";
+import Personaldetails from "../userSection/userProfileSetupssection/Personaldetails";
+import Contanctdetails from "../userSection/userProfileSetupssection/Contanctdetails";
 
 const styles = (theme) => ({
   paper: {
@@ -25,6 +33,15 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#fff",
+  },
+
+  UserProfilePaper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(1),
+    // display: "flex",
+    // flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "transparent",
   },
 
   papers: {
@@ -48,9 +65,15 @@ const styles = (theme) => ({
     minHeight: "79vh",
   },
   firstContainer: {
-    backgroundColor: "rgba(129, 134, 154, 0.36)",
+    backgroundColor: "rgba(129, 134, 154, 0.15)",
     minHeight: "79vh",
-    // height : "100%"
+  },
+
+  UserProfile: {
+    width: "25%",
+    height: "100%",
+    // width : "133px",
+    // height : "133px"
   },
 
   iconsButton: {
@@ -65,11 +88,15 @@ const styles = (theme) => ({
     marginTop: theme.spacing(3),
   },
 
+  smallTidotDesign: {
+    width: "70%",
+    // height : "%",
+    // backgroundColor : "black"
+  },
+
   avatar: {
-    // marginBottom: theme.spacing(5),
     width: 95,
     height: 95,
-    // position: "absolute",
   },
 
   realLogo: {
@@ -83,10 +110,8 @@ const styles = (theme) => ({
   },
 
   TidotSecondavatar: {
-    // marginBottom: theme.spacing(5),
     width: "15%",
     height: "25%",
-    // position: "absolute",
   },
 
   Transportavatar: {
@@ -94,7 +119,6 @@ const styles = (theme) => ({
     height: "100%",
   },
   ridesAvatars: {
-    // width: 392,
     width: "45%",
     height: "100%",
   },
@@ -160,13 +184,49 @@ const BootstrapButton = withStyles({
   },
 })(Button);
 
+// const steps = ["Bio details", "Personal details", "Contanct details"];
+
+// //function for steps
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <Biodetails />;
+//     case 1:
+//       return <Personaldetails />;
+//     case 2:
+//       return <Contanctdetails />;
+//     default:
+//       throw new Error("Unknown step");
+//   }
+// }
+
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       width: window.innerWidth,
+      step : 1, 
     };
   }
+  
+  nextStep = () => {
+    const {step} = this.state;
+    this.setState({
+      step : step + 1
+    });
+  }
+
+  PrevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step : step - 1
+    });
+  }
+
+  handleChange = input => e => {
+    this.setState({[input] : e.target.value });
+  }
+
   componentDidMount() {
     document.title = "        Login";
     document.body.style.backgroundColor = "#fff";
@@ -194,178 +254,7 @@ class UserProfile extends React.Component {
     // the rest is the same...
 
     if (isMobile) {
-      return (
-        <div className={classes.root}>
-          <Container component="main" maxWidth="xl">
-            <div className={classes.paper}>
-              <div>
-                <img
-                  src={TidotLogo}
-                  alt="logo"
-                  className={classes.avatar}
-                ></img>
-              </div>
-              <Container
-                maxWidth="xs"
-                style={{
-                  backgroundColor: "#fff",
-                }}
-              >
-                <CssBaseline />
-                <div className={classes.paper}>
-                  <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                      <Typography
-                        component="h1"
-                        variant="h5 bold"
-                        align="center"
-                        style={{ color: "#004AAD", fontSize: "24px" }}
-                      >
-                        Sign in to Tidot
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <form
-                    className={classes.form}
-                    Validate
-                    onSubmit={this.handleSubmit}
-                  >
-                    <div
-                      style={{
-                        alignItems: "center",
-                        paddingLeft: 0,
-                        paddingRight: 0,
-                      }}
-                    >
-                      <Grid container spacing={4}>
-                        <Grid item xs={12}>
-                          <BootstrapButton
-                            href="/"
-                            variant="contained"
-                            color="primary"
-                            // disabled={loading}
-                            fullWidth
-                          >
-                            <img
-                              src={GoogleLogo}
-                              alt="i"
-                              style={{ paddingRight: "20px" }}
-                            />
-                            <Typography
-                              component="h5"
-                              variant="h5 bold"
-                              align="center"
-                              style={{
-                                color: "#004AAD",
-                                fontSize: "16px",
-                              }}
-                            >
-                              Sign in with Google
-                            </Typography>
-                          </BootstrapButton>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <BootstrapButton
-                            href="/"
-                            variant="contained"
-                            color="primary"
-                            // disabled={loading}
-                            fullWidth
-                          >
-                            <img
-                              src={FacebookLogo}
-                              alt="i"
-                              style={{ paddingRight: "20px" }}
-                            />
-                            <Typography
-                              component="h5"
-                              variant="h5 bold"
-                              align="center"
-                              style={{ color: "#004AAD", fontSize: "16px" }}
-                            >
-                              Sign in with Facebook
-                            </Typography>
-                          </BootstrapButton>
-                        </Grid>
-                      </Grid>
-
-                      <Grid
-                        container
-                        spacing={0}
-                        className={classes.iconsButton}
-                      >
-                        <Grid item xs={12}>
-                          <TextField
-                            className={classes.inputField}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            onChange={this.handleInputChange}
-                            autoFocus
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            className={classes.inputField}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={this.handleInputChange}
-                          />
-                        </Grid>
-
-                        <Grid item xs={12} className={classes.SigninButton}>
-                          {loading && <CircularSpinner />}
-                          <BootstrapButton
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            style={{
-                              backgroundColor: "#004AAD",
-                            }}
-                            disabled={loading}
-                            fullWidth
-                          >
-                            Sign in.{" "}
-                          </BootstrapButton>
-                        </Grid>
-                      </Grid>
-
-                      <Grid container spacing={2} style={{ marginTop: 15 }}>
-                        <Grid item xs={12}>
-                          <Typography
-                            component="label"
-                            variant="p"
-                            style={{ fontSize: 12 }}
-                            align="center"
-                          >
-                            Not Registered ?
-                            <a id="link" href="/register" variant="p">
-                              {" "}
-                              Sign up
-                            </a>
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </form>
-                </div>
-              </Container>
-            </div>
-          </Container>
-        </div>
-      );
+      return <h1>Mobile</h1>;
     } else {
       return (
         <div className={classes.root} style={{ backgroundColor: " #004AAD" }}>
@@ -379,24 +268,46 @@ class UserProfile extends React.Component {
             <div className={classes.paper} style={{ flexDirection: "row" }}>
               {/* first Container */}
               <Container maxWidth="md" className={classes.firstContainer}>
-                {" "}
-                <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    <Typography
-                      component="h1"
-                      variant="h5 bold"
-                      align="center"
-                      style={{ color: "#004AAD", fontSize: "24px" }}
-                    >
-                      Profile setup
-                    </Typography>
+                <div
+                  className={classes.UserProfilePaper}
+                  style={{ flexDirection: "row" }}
+                >
+                  <Grid container spacing={1}>
+                    <Grid item xs={3}>
+                      {" "}
+                      <Avatar
+                        src={smallTidotLogo}
+                        alt="logo"
+                        className={classes.smallTidotDesign}
+                        variant="square"
+                      ></Avatar>{" "}
+                    </Grid>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={8}>
+                      <Typography
+                        component="h1"
+                        variant="h5 bold"
+                        align="left"
+                        style={{
+                          color: "rgba(129, 134, 154, 0.86)",
+                          fontWeight: "500",
+                          width: "70%",
+                          // height: "25%",
+                        }}
+                      >
+                        Profile setup
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={8}>
+                      <Avatar
+                        src={UserImage}
+                        alt="logo"
+                        className={classes.UserProfile}
+                      ></Avatar>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12}>
-                    {" "}
-                    <Avatar src={UserImage}></Avatar>
-                  </Grid>
-                </Grid>
-                <div className={classes.papers}></div>
+                </div>
               </Container>
               {/*  */}
               {/*  */}
