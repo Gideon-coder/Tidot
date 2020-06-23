@@ -1,29 +1,20 @@
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import TidotLogo from "../../assets/design/Tidot white logo on blue background.png";
-import FacebookLogo from "../../assets/design/Vector.png";
-import Facebook from "../../assets/design/FacebookTidotDesktop.png";
-import GoogleLogo from "../../assets/design/Icon.png";
-import Google from "../../assets/design/TidotDesktopGoogle.png";
 import UserImage from "../../assets/design/TidotImage.png";
 import smallTidotLogo from "../../assets/design/smallTidotLogo.png";
-import rides from "../../assets/design/rides.png";
-import transport from "../../assets/design/transport.svg";
-import CircularSpinner from "../../components/spinner/circularSpinner/circularSpinner";
+import clsx from "clsx";
 import Biodetails from "../userSection/userProfileSetupssection/Biodetails";
 import Personaldetails from "../userSection/userProfileSetupssection/Personaldetails";
 import Contanctdetails from "../userSection/userProfileSetupssection/Contanctdetails";
+import { makeStyles } from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
 
 const styles = (theme) => ({
   paper: {
@@ -76,63 +67,15 @@ const styles = (theme) => ({
     // height : "133px"
   },
 
-  iconsButton: {
-    marginTop: theme.spacing(5),
-  },
-
-  inputField: {
-    backgroundColor: "rgba(129, 134, 154, 0.36)",
-  },
-
-  SigninButton: {
-    marginTop: theme.spacing(3),
-  },
-
   smallTidotDesign: {
     width: "70%",
     // height : "%",
     // backgroundColor : "black"
   },
 
-  avatar: {
-    width: 95,
-    height: 95,
-  },
-
-  realLogo: {
-    width: "30%",
-    height: "50%",
-  },
-
-  realLogoFacbook: {
-    width: "50%",
-    height: "50%",
-  },
-
-  TidotSecondavatar: {
-    width: "15%",
-    height: "25%",
-  },
-
-  Transportavatar: {
-    width: "85%",
-    height: "100%",
-  },
-  ridesAvatars: {
-    width: "45%",
-    height: "100%",
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  footer: {
-    padding: theme.spacing(0, 0),
-    marginTop: "auto",
-    backgroundColor: "#B670D3",
   },
   root: {
     display: "flex",
@@ -141,6 +84,105 @@ const styles = (theme) => ({
     backgroundColor: " #fff;",
   },
 });
+
+{
+  /* begining of code for the form stepping*/
+}
+{
+  /* begining of code for the form stepping*/
+}
+{
+  /* begining of code for the form stepping*/
+}
+const useColorlibStepIconStyles = makeStyles({
+  root: {
+    backgroundColor: "#ccc",
+    zIndex: 1,
+    color: "#fff",
+    width: 40,
+    height: 40,
+    display: "flex",
+    borderRadius: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  active: {
+    // backgroundImage:
+    //   "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
+    backgroundColor: "#FFA300",
+  },
+  completed: {
+    //   backgroundImage:
+    //     "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+
+    backgroundColor: "#FFA300",
+  },
+});
+
+function ColorlibStepIcon(props) {
+  const classes = useColorlibStepIconStyles();
+  const { active, completed } = props;
+
+  const icons = {
+    1: (
+      <div class="numberCircle">
+        <h2>1</h2>
+      </div>
+    ),
+    2: (
+      <div class="numberCircle">
+        <h2>2</h2>
+      </div>
+    ),
+    3: (
+      <div class="numberCircle">
+        <h2>3</h2>
+      </div>
+    ),
+  };
+
+  return (
+    <div
+      className={clsx(classes.root, {
+        [classes.active]: active,
+        [classes.completed]: completed,
+      })}
+    >
+      {icons[String(props.icon)]}
+    </div>
+  );
+}
+
+function getSteps() {
+  return [
+    <h1>Bio details</h1>,
+    <h1>Personal details</h1>,
+    <h1>Emergency contanct</h1>,
+  ];
+}
+
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return <Biodetails />;
+    case 1:
+      return <Personaldetails />;
+    case 2:
+      return <Contanctdetails />;
+    default:
+      return "Unknown stepIndex";
+  }
+}
+{
+  /* end of partition for form stepping code*/
+}
+{
+  /* end of partition for form stepping code*/
+}
+{
+  /* end of partition for form stepping code*/
+}
 
 const BootstrapButton = withStyles({
   root: {
@@ -184,51 +226,38 @@ const BootstrapButton = withStyles({
   },
 })(Button);
 
-// const steps = ["Bio details", "Personal details", "Contanct details"];
-
-// //function for steps
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <Biodetails />;
-//     case 1:
-//       return <Personaldetails />;
-//     case 2:
-//       return <Contanctdetails />;
-//     default:
-//       throw new Error("Unknown step");
-//   }
-// }
-
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       width: window.innerWidth,
-      step : 1, 
+      activeStep: 0,
     };
   }
-  
-  nextStep = () => {
-    const {step} = this.state;
-    this.setState({
-      step : step + 1
-    });
-  }
+  handleNext = () => {
+    const { activeStep } = this.state;
 
-  PrevStep = () => {
-    const { step } = this.state;
     this.setState({
-      step : step - 1
+      activeStep: activeStep + 1,
     });
-  }
+  };
 
-  handleChange = input => e => {
-    this.setState({[input] : e.target.value });
-  }
+  handleBack = () => {
+    const { activeStep } = this.state;
+
+    this.setState({
+      activeStep: activeStep - 1,
+    });
+  };
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0,
+    });
+  };
 
   componentDidMount() {
-    document.title = "        Login";
+    document.title = "        User Profile";
     document.body.style.backgroundColor = "#fff";
   }
 
@@ -250,6 +279,8 @@ class UserProfile extends React.Component {
   render() {
     const { width } = this.state;
     const { classes, loading } = this.props;
+    const { activeStep } = this.state;
+    const steps = getSteps();
     const isMobile = width <= 500;
     // the rest is the same...
 
@@ -272,7 +303,7 @@ class UserProfile extends React.Component {
                   className={classes.UserProfilePaper}
                   style={{ flexDirection: "row" }}
                 >
-                  <Grid container spacing={1}>
+                  <Grid container spacing={3}>
                     <Grid item xs={3}>
                       {" "}
                       <Avatar
@@ -306,161 +337,63 @@ class UserProfile extends React.Component {
                         className={classes.UserProfile}
                       ></Avatar>
                     </Grid>
+                    <Grid item xs={4}></Grid>
+                    <Grid item xs={8}>
+                      <p>@12334ddf4</p>
+                    </Grid>
                   </Grid>
+                  <Stepper
+                    activeStep={activeStep}
+                    orientation="vertical"
+                    style={{ backgroundColor: "transparent" }}
+                    // connector={false}
+                  >
+                    {steps.map((label) => (
+                      <Step key={label}>
+                        <StepLabel StepIconComponent={ColorlibStepIcon}>
+                          {label}
+                        </StepLabel>
+                      </Step>
+                    ))}
+                  </Stepper>
                 </div>
               </Container>
               {/*  */}
               {/*  */}
               {/* second container */}
               <Container maxWidth="md" className={classes.secondContainer}>
-                {" "}
-                <Avatar
-                  src={TidotLogo}
-                  alt="logo"
-                  className={classes.TidotSecondavatar}
-                  variant="square"
-                ></Avatar>{" "}
                 <div className={classes.papers}>
-                  <Container
-                    maxWidth="md"
-                    style={{
-                      backgroundColor: "#fff",
-                    }}
-                  >
-                    <Grid container spacing={1}>
-                      <Grid item xs={12}>
-                        <Typography
-                          component="h1"
-                          variant="h5 bold"
-                          align="start"
-                          style={{ color: "#004AAD", fontSize: "24px" }}
+                  {activeStep === steps.length ? (
+                    <div>
+                      <Typography className={classes.instructions}>
+                        All steps completed
+                      </Typography>
+                      <Button onClick={this.handleReset}>Reset</Button>
+                    </div>
+                  ) : (
+                    <div>
+                      {/* <Typography className={classes.instructions}> */}
+                      {getStepContent(activeStep)}
+                      {/* </Typography> */}
+                      <div>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={this.handleBack}
+                          className={classes.backButton}
                         >
-                          Sign in with
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <form
-                      className={classes.form}
-                      Validate
-                      onSubmit={this.handleSubmit}
-                    >
-                      <div
-                        style={{
-                          alignItems: "center",
-                          paddingLeft: 0,
-                          paddingRight: 0,
-                        }}
-                      >
-                        <Grid container spacing={4}>
-                          <Grid item xs={6}>
-                            <BootstrapButton
-                              href="/"
-                              variant="contained"
-                              color="primary"
-                              // disabled={loading}
-                              fullWidth
-                            >
-                              <Avatar
-                                src={Google}
-                                alt="i"
-                                variant="square"
-                                className={classes.realLogo}
-                                // style={{ paddingRight: "20px" }}
-                              />
-                            </BootstrapButton>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <BootstrapButton
-                              href="/"
-                              variant="contained"
-                              color="primary"
-                              // disabled={loading}
-                              fullWidth
-                            >
-                              <Avatar
-                                src={Facebook}
-                                className={classes.realLogoFacbook}
-                                variant="square"
-                                alt="i"
-                                // style={{ paddingRight: "20px" }}
-                              />
-                            </BootstrapButton>
-                          </Grid>
-                        </Grid>
-
-                        <Grid
-                          container
-                          spacing={0}
-                          className={classes.iconsButton}
+                          Back
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={this.handleNext}
                         >
-                          <Grid item xs={12}>
-                            <TextField
-                              className={classes.inputField}
-                              variant="outlined"
-                              margin="normal"
-                              required
-                              fullWidth
-                              id="email"
-                              label="Email Address"
-                              name="email"
-                              autoComplete="email"
-                              onChange={this.handleInputChange}
-                              autoFocus
-                            />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <TextField
-                              className={classes.inputField}
-                              variant="outlined"
-                              margin="normal"
-                              required
-                              fullWidth
-                              name="password"
-                              label="Password"
-                              type="password"
-                              id="password"
-                              autoComplete="current-password"
-                              onChange={this.handleInputChange}
-                            />
-                          </Grid>
-
-                          <Grid item xs={12} className={classes.SigninButton}>
-                            {loading && <CircularSpinner />}
-                            <BootstrapButton
-                              type="submit"
-                              variant="contained"
-                              color="primary"
-                              style={{
-                                backgroundColor: "#004AAD",
-                              }}
-                              disabled={loading}
-                              fullWidth
-                            >
-                              Sign in.{" "}
-                            </BootstrapButton>
-                          </Grid>
-                        </Grid>
-
-                        <Grid container spacing={2} style={{ marginTop: 15 }}>
-                          <Grid item xs={12}>
-                            <Typography
-                              component="label"
-                              variant="p"
-                              style={{ fontSize: 12 }}
-                              align="center"
-                            >
-                              Not Registered ?
-                              <a id="link" href="/register" variant="p">
-                                {" "}
-                                Sign up
-                              </a>
-                            </Typography>
-                          </Grid>
-                        </Grid>
+                          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                        </Button>
                       </div>
-                    </form>
-                  </Container>
-                </div>
+                    </div>
+                  )}
+                </div>{" "}
               </Container>
             </div>
           </Container>
