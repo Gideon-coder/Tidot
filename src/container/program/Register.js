@@ -15,6 +15,19 @@ import Google from "../../assets/design/TidotDesktopGoogle.png";
 import rides from "../../assets/design/rides.png";
 import transport from "../../assets/design/transport.svg";
 import CircularSpinner from "../../components/spinner/circularSpinner/circularSpinner";
+//
+// import clsx from 'clsx';
+// import { makeStyles } from '@material-ui/core/styles';
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import FilledInput from "@material-ui/core/FilledInput";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const styles = (theme) => ({
   paper: {
@@ -141,8 +154,8 @@ const BootstrapButton = withStyles({
       '"Segoe UI Symbol"',
     ].join(","),
     "&:hover": {
-      backgroundColor: "#b80707",
-      borderColor: "#b80707",
+      backgroundColor: "#004AAD",
+      borderColor: "#004AAD",
       boxShadow: "none",
     },
     "&:active": {
@@ -164,8 +177,21 @@ class Register extends React.Component {
     super(props);
     this.state = {
       width: window.innerWidth,
+      showPassword: false,
     };
   }
+
+  handleClickShowPassword = () => {
+    // setValues({ ...values, showPassword: !values.showPassword });
+    this.setState({
+      showPassword: !this.state.showPassword,
+    });
+  };
+
+  handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   componentDidMount() {
     document.title = "        Login";
     document.body.style.backgroundColor = "#fff";
@@ -417,12 +443,34 @@ class Register extends React.Component {
               {/* second container */}
               <Container maxWidth="md" className={classes.secondContainer}>
                 {" "}
-                <Avatar
-                  src={TidotLogo}
-                  alt="logo"
-                  className={classes.TidotSecondavatar}
-                  variant="square"
-                ></Avatar>{" "}
+                <Grid container spacing={1}>
+                  <Avatar
+                    src={TidotLogo}
+                    alt="logo"
+                    className={classes.TidotSecondavatar}
+                    variant="square"
+                  ></Avatar>{" "}
+                  <Grid item xs={9}>
+                    <p align="right">
+                      Already registered?{" "}
+                      <a href="/" style={{ color: "#FFA300" }}>
+                        Sign in
+                      </a>
+                    </p>
+                    {/* <Typography
+                              component="label"
+                              variant="p"
+                              style={{ fontSize: 12 }}
+                              align="right"
+                            >
+                              Already Registered ?
+                              <a id="link" href="/register" variant="p">
+                                {" "}
+                                Login
+                              </a>
+                            </Typography> */}
+                  </Grid>
+                </Grid>
                 <div className={classes.papers}>
                   <Container
                     maxWidth="md"
@@ -436,9 +484,9 @@ class Register extends React.Component {
                           component="h1"
                           variant="h5 bold"
                           align="start"
-                          style={{ color: "#004AAD", fontSize: "24px" }}
+                          style={{ color: "#004AAD", fontSize: "30px" }}
                         >
-                          Sign up with
+                          Sign up
                         </Typography>
                       </Grid>
                     </Grid>
@@ -454,43 +502,6 @@ class Register extends React.Component {
                           paddingRight: 0,
                         }}
                       >
-                        <Grid container spacing={4}>
-                          <Grid item xs={6}>
-                            <BootstrapButton
-                              href="/"
-                              variant="contained"
-                              color="primary"
-                              // disabled={loading}
-                              fullWidth
-                            >
-                              <Avatar
-                                src={Google}
-                                alt="i"
-                                variant="square"
-                                className={classes.realLogo}
-                                // style={{ paddingRight: "20px" }}
-                              />
-                            </BootstrapButton>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <BootstrapButton
-                              href="/"
-                              variant="contained"
-                              color="primary"
-                              // disabled={loading}
-                              fullWidth
-                            >
-                              <Avatar
-                                src={Facebook}
-                                className={classes.realLogoFacbook}
-                                variant="square"
-                                alt="i"
-                                // style={{ paddingRight: "20px" }}
-                              />
-                            </BootstrapButton>
-                          </Grid>
-                        </Grid>
-
                         <Grid
                           container
                           spacing={0}
@@ -503,28 +514,75 @@ class Register extends React.Component {
                               margin="normal"
                               required
                               fullWidth
-                              id="email"
-                              label="Email Address"
-                              name="email"
-                              autoComplete="email"
+                              id="phone number"
+                              label="Phone number"
+                              name="phone number"
+                              // autoComplete="number"
                               onChange={this.handleInputChange}
                               autoFocus
                             />
                           </Grid>
                           <Grid item xs={12}>
-                            <TextField
+                            <FormControl
                               className={classes.inputField}
                               variant="outlined"
                               margin="normal"
                               required
                               fullWidth
-                              name="password"
-                              label="Password"
-                              type="password"
-                              id="password"
-                              autoComplete="current-password"
-                              onChange={this.handleInputChange}
+                            >
+                              <InputLabel htmlFor="outlined-adornment-password">
+                                Password
+                              </InputLabel>
+                              <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={
+                                  this.state.showPassword ? "text" : "password"
+                                }
+                                // value={this.state.showPassword}
+                                // onChange={handleChange("password")}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={this.handleClickShowPassword}
+                                      onMouseDown={this.handleMouseDownPassword}
+                                      edge="end"
+                                    >
+                                      {this.state.showPassword ? (
+                                        <Visibility />
+                                      ) : (
+                                        <VisibilityOff />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                labelWidth={70}
+                              />
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={12}>
+                            {/* <div className="form-check"> */}
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="gridCheck"
+                              required
                             />
+                            <label className="form-check-label" for="gridCheck">
+                              {/* <a href="/terms" id="alt">
+                                
+                              </a> */}
+                              Creating an account with us means, you agree to
+                              our{" "}
+                              <a href="/" style={{ color: "#FFA300" }}>
+                                Terms of Service
+                              </a>{" "}
+                              and{" "}
+                              <a href="/" style={{ color: "#FFA300" }}>
+                                Privacy Policy
+                              </a>
+                            </label>
+                            {/* </div> */}
                           </Grid>
 
                           <Grid item xs={12} className={classes.SigninButton}>
@@ -541,23 +599,6 @@ class Register extends React.Component {
                             >
                               Sign up.{" "}
                             </BootstrapButton>
-                          </Grid>
-                        </Grid>
-
-                        <Grid container spacing={2} style={{ marginTop: 15 }}>
-                          <Grid item xs={12}>
-                            <Typography
-                              component="label"
-                              variant="p"
-                              style={{ fontSize: 12 }}
-                              align="center"
-                            >
-                              Already Registered ?
-                              <a id="link" href="/register" variant="p">
-                                {" "}
-                                Login
-                              </a>
-                            </Typography>
                           </Grid>
                         </Grid>
                       </div>

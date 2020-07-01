@@ -6,7 +6,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import UserImage from "../../assets/design/TidotImage.png";
-import smallTidotLogo from "../../assets/design/smallTidotLogo.png";
+import smallTidotLogo from "../../assets/design/newTidotLogo.png";
 import clsx from "clsx";
 import Biodetails from "../userSection/userProfileSetupssection/Biodetails";
 import Personaldetails from "../userSection/userProfileSetupssection/Personaldetails";
@@ -38,7 +38,7 @@ const styles = (theme) => ({
   papers: {
     marginTop: theme.spacing(15),
     marginBottom: theme.spacing(15),
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(0),
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
@@ -68,7 +68,7 @@ const styles = (theme) => ({
   },
 
   smallTidotDesign: {
-    width: "70%",
+    width: "90%",
     // height : "%",
     // backgroundColor : "black"
   },
@@ -278,7 +278,7 @@ class UserProfile extends React.Component {
   //beggining of render method
   render() {
     const { width } = this.state;
-    const { classes, loading } = this.props;
+    const { classes, loading} = this.props;
     const { activeStep } = this.state;
     const steps = getSteps();
     const isMobile = width <= 500;
@@ -304,17 +304,20 @@ class UserProfile extends React.Component {
                   style={{ flexDirection: "row" }}
                 >
                   <Grid container spacing={3}>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} style= {{}}>
                       {" "}
-                      <Avatar
+                      <div>
+                      {/* <Avatar
                         src={smallTidotLogo}
                         alt="logo"
                         className={classes.smallTidotDesign}
                         variant="square"
-                      ></Avatar>{" "}
+                      ></Avatar>{" "} */}
+                      <img src={smallTidotLogo} style={{width : "20%", height : "20%"}}></img>
+                      </div>
                     </Grid>
                     <Grid item xs={1}></Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7} style= {{}}>
                       <Typography
                         component="h1"
                         variant="h5 bold"
@@ -371,7 +374,7 @@ class UserProfile extends React.Component {
                       <Button onClick={this.handleReset}>Reset</Button>
                     </div>
                   ) : (
-                    <div>
+                    <div style={{width : "100%"}}>
                       {/* <Typography className={classes.instructions}> */}
                       {getStepContent(activeStep)}
                       {/* </Typography> */}

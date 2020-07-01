@@ -379,11 +379,7 @@ class Login extends React.Component {
               {/* first Container */}
               <Container maxWidth="md" className={classes.firstContainer}>
                 {" "}
-                {/* <img
-                  src={TidotLogo}
-                  alt="logo"
-                  className={classes.TidotSecondavatar}
-                ></img>{" "} */}
+                
                 <div className={classes.papers}>
                   <Container
                     maxWidth="md"
@@ -460,7 +456,6 @@ class Login extends React.Component {
                               href="/"
                               variant="contained"
                               color="primary"
-                              // disabled={loading}
                               fullWidth
                             >
                               <Avatar
@@ -468,7 +463,6 @@ class Login extends React.Component {
                                 alt="i"
                                 variant="square"
                                 className={classes.realLogo}
-                                // style={{ paddingRight: "20px" }}
                               />
                             </BootstrapButton>
                           </Grid>
@@ -477,7 +471,6 @@ class Login extends React.Component {
                               href="/"
                               variant="contained"
                               color="primary"
-                              // disabled={loading}
                               fullWidth
                             >
                               <Avatar
@@ -485,7 +478,6 @@ class Login extends React.Component {
                                 className={classes.realLogoFacbook}
                                 variant="square"
                                 alt="i"
-                                // style={{ paddingRight: "20px" }}
                               />
                             </BootstrapButton>
                           </Grid>
